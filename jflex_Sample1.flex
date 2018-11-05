@@ -59,13 +59,7 @@ H = [a-fA-F0-9]
 E = [Ee][+-]?{D}+
 FS = (f|F|l|L)
 IS = (u|U|l|L)*
-LT = \r|\n|\r\n
-WS = {LT}|[ \v\t\f]
-Comment = {TraditionalComment} | {EndOfLineComment}
-TraditionalComment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
-EndOfLineComment = "//" [^\r\n]* {LT}?
 
-     
 %%
 /* ------------------------Lexical Rules Section---------------------- */
    
@@ -178,4 +172,15 @@ L?'(\\.|[^\\'])+'	{  return symbol(CONSTANT); }
 
 .|\n                             { throw new RuntimeException("Illegal character \""+yytext()+
                                                               "\" at line "+yyline+", column "+yycolumn); }
-<<EOF>>                          { return symbol(sym.EOF); }
+
+
+# public static void main(String[] args) {
+# 	// the code to use a file and get the symbols
+# 	int ID;
+# 	File file = new File("E:\\Facultate Anul 4\\Proiectoarea translatoarelor\Labs\\CStandardAnalyzer.git\\Input.txt");
+#	BufferedReader br = new BufferedReader(new FileReader(file));
+#	String st; 
+#	while ((st = br.readLine()) != null)
+#	{
+#}
+#}
