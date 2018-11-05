@@ -4,178 +4,130 @@
 import java_cup.runtime.*;
       
 %%
-   
-/* -----------------Options and Declarations Section----------------- */
-   
-/* 
-   The name of the class JFlex will create will be Lexer.
-   Will write the code to the file Lexer.java. 
-*/
+
 %class Lexer
 
-/*
-  The current line number can be accessed with the variable yyline
-  and the current column number with the variable yycolumn.
-*/
 %line
 %column
-    
-/* 
-   Will switch to a CUP compatibility mode to interface with a CUP
-   generated parser.
-*/
+%implements sym
 %cup
    
-/*
- 			  Declarations
-   
-*/
 %{   
-    /* To create a new java_cup.runtime.Symbol with information about
-       the current token, the token will have no value in this
-       case. */
+	StringBuffer string = new StringBuffer();
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
     }
-    
-    /* Also creates a new java_cup.runtime.Symbol with information
-       about the current token, but this object has a value. */
+
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
     }
+	public String toString() {
+          return ("line : " + (this.yyline + 1) + ", column : " + this.yycolumn + ", value :" + this.yytext());
+   }
 %}
-   
 
-/*
-  Macro Declarations
-  
-  These declarations are regular expressions that will be used latter
-  in the Lexical Rules Section.  
-*/
+DIGIT  =  [0-9]
+ID     =  [a-zA-Z][a-zA-Z0-9]*
 
-D = [0-9]
-L = [a-zA-Z_]
-H = [a-fA-F0-9]
-E = [Ee][+-]?{D}+
-FS = (f|F|l|L)
-IS = (u|U|l|L)*
-LT = \r|\n|\r\n
-WS = {LT}|[ \v\t\f]
-Comment = {TraditionalComment} | {EndOfLineComment}
-TraditionalComment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
-EndOfLineComment = "//" [^\r\n]* {LT}?
+LineTerminator = \r|\n|\r\n
+
+WhiteSpace     = {LineTerminator} | [ \t\f]
+
 
      
 %%
-/* ------------------------Lexical Rules Section---------------------- */
-   
-/*
-   This section contains regular expressions and actions, i.e. Java
-   code, that will be executed when the scanner matches the associated
-   regular expression. */
-   
-   /* YYINITIAL is the state at which the lexer begins scanning.  So
-   these regular expressions will only be matched if the scanner is in
-   the start state YYINITIAL. */
-   
-<YYINITIAL> {
-    
-"/*"			{ return symbol(COMMENT); }
-
-"auto"			{  return symbol(AUTO); }
-"break"			{  return symbol(BREAK); }
-"case"			{  return symbol(CASE); }
-"char"			{  return symbol(CHAR); }
-"const"			{  return symbol(CONST); }
-"continue"		{  return symbol(CONTINUE); }
-"default"		{  return symbol(DEFAULT); }
-"do"			{  return symbol(DO); }
-"double"		{  return symbol(DOUBLE); }
-"else"			{  return symbol(ELSE); }
-"enum"			{  return symbol(ENUM); }
-"extern"		{  return symbol(EXTERN); }
-"float"			{  return symbol(FLOAT); }
-"for"			{  return symbol(FOR); }
-"goto"			{  return symbol(GOTO); }
-"if"			{  return symbol(IF); }
-"int"			{  return symbol(INT); }
-"long"			{  return symbol(LONG); }
-"register"		{  return symbol(REGISTER); }
-"return"		{  return symbol(RETURN); }
-"short"			{  return symbol(SHORT); }
-"signed"		{  return symbol(SIGNED); }
-"sizeof"		{  return symbol(SIZEOF); }
-"static"		{  return symbol(STATIC); }
-"struct"		{  return symbol(STRUCT); }
-"switch"		{  return symbol(SWITCH); }
-"typedef"		{  return symbol(TYPEDEF); }
-"union"			{  return symbol(UNION); }
-"unsigned"		{  return symbol(UNSIGNED); }
-"void"			{  return symbol(VOID); }
-"volatile"		{  return symbol(VOLATILE); }
-"while"			{  return symbol(WHILE); }
 
 
-0[xX]{H}+{IS}?		{  return symbol(CONSTANT); }
-0{D}+{IS}?		{  return symbol(CONSTANT); }
-{D}+{IS}?		{  return symbol(CONSTANT); }
-L?'(\\.|[^\\'])+'	{  return symbol(CONSTANT); }
 
-{D}+{E}{FS}?		{  return symbol(CONSTANT); }
-{D}*"."{D}+({E})?{FS}?	{  return symbol(CONSTANT); }
-{D}+"."{D}*({E})?{FS}?	{  return symbol(CONSTANT); }
+{DIGIT}+		{return symbol(INT, yytext().trim());}
+{DIGIT}+"."{DIGIT}*   {return symbol(FLOAT, yytext().trim());}
 
-"..."			{  return symbol(ELLIPSIS); }
-">>="			{  return symbol(RIGHT_ASSIGN); }
-"<<="			{  return symbol(LEFT_ASSIGN); }
-"+="			{  return symbol(ADD_ASSIGN); }
-"-="			{  return symbol(SUB_ASSIGN); }
-"*="			{  return symbol(MUL_ASSIGN); }
-"/="			{  return symbol(DIV_ASSIGN); }
-"%="			{  return symbol(MOD_ASSIGN); }
-"&="			{  return symbol(AND_ASSIGN); }
-"^="			{  return symbol(XOR_ASSIGN); }
-"|="			{  return symbol(OR_ASSIGN); }
-">>"			{  return symbol(RIGHT_OP); }
-"<<"			{  return symbol(LEFT_OP); }
-"++"			{  return symbol(INC_OP); }
-"--"			{  return symbol(DEC_OP); }
-"->"			{  return symbol(PTR_OP); }
-"&&"			{  return symbol(AND_OP); }
-"||"			{  return symbol(OR_OP); }
-"<="			{  return symbol(LE_OP); }
-">="			{  return symbol(GE_OP); }
-"=="			{  return symbol(EQ_OP); }
-"!="			{  return symbol(NE_OP); }
-";"			{  return symbol(';'); }
-("{"|"<%")		{  return symbol('{'); }
-("}"|"%>")		{  return symbol('}'); }
-","			{  return symbol(','); }
-":"			{  return symbol(':'); }
-"="			{  return symbol('='); }
-"("			{  return symbol('('); }
-")"			{  return symbol(')'); }
-("["|"<:")		{  return symbol('['); }
-("]"|":>")		{  return symbol(']'); }
-"."			{  return symbol('.'); }
-"&"			{  return symbol('&'); }
-"!"			{  return symbol('!'); }
-"~"			{  return symbol('~'); }
-"-"			{  return symbol('-'); }
-"+"			{  return symbol('+'); }
-"*"			{  return symbol('*'); }
-"/"			{  return symbol('/'); }
-"%"			{  return symbol('%'); }
-"<"			{  return symbol('<'); }
-">"			{  return symbol('>'); }
-"^"			{  return symbol('^'); }
-"|"			{  return symbol('|'); }
-"?"			{  return symbol('?'); }
 
-[ \t\v\n\f]		{  }
-.			{ /* ignore bad characters */ }
-}
-
-.|\n                             { throw new RuntimeException("Illegal character \""+yytext()+
+{DIGIT}+{ID}*   { throw new Error("Illegal character \""+yytext()+
                                                               "\" at line "+yyline+", column "+yycolumn); }
-<<EOF>>                          { return symbol(sym.EOF); }
+"([^\r^\n^']|\\0)"  {return symbol(CHAR, yytext().trim());}
+\"[^\"]*\"          {return symbol(STRING, yytext().trim());} 
+
+[\r|\n|\r\n]* "/*"			{ return symbol(COMMENT, yytext().trim()); }			
+"auto"			{  return symbol(AUTO, yytext().trim()); }
+"break"			{  return symbol(BREAK, yytext().trim()); }
+"case"			{  return symbol(CASE, yytext().trim()); }
+"char"			{  return symbol(CHAR, yytext().trim()); }
+"const"			{  return symbol(CONST, yytext().trim()); }
+"continue"		{  return symbol(CONTINUE, yytext().trim()); }
+"default"		{  return symbol(DEFAULT, yytext().trim()); }
+"do"			{  return symbol(DO, yytext().trim()); }
+"double"		{  return symbol(DOUBLE, yytext().trim()); }
+"else"			{  return symbol(ELSE, yytext().trim()); }
+"enum"			{  return symbol(ENUM, yytext().trim()); }
+"extern"		{  return symbol(EXTERN, yytext().trim()); }
+"float"			{  return symbol(FLOAT, yytext().trim()); }
+"for"			{  return symbol(FOR, yytext().trim()); }
+"goto"			{  return symbol(GOTO, yytext().trim()); }
+"if"			{  return symbol(IF, yytext().trim()); }
+"int"			{  return symbol(INT, yytext().trim()); }
+"long"			{  return symbol(LONG, yytext().trim()); }
+"register"		{  return symbol(REGISTER, yytext().trim()); }
+"return"		{  return symbol(RETURN, yytext().trim()); }
+"short"			{  return symbol(SHORT, yytext().trim()); }
+"signed"		{  return symbol(SIGNED, yytext().trim()); }
+"sizeof"		{  return symbol(SIZEOF, yytext().trim()); }
+"static"		{  return symbol(STATIC, yytext().trim()); }
+"struct"		{  return symbol(STRUCT, yytext().trim()); }
+"switch"		{  return symbol(SWITCH, yytext().trim()); }
+"typedef"		{  return symbol(TYPEDEF, yytext().trim()); }
+"union"			{  return symbol(UNION, yytext().trim()); }
+"unsigned"		{  return symbol(UNSIGNED, yytext().trim()); }
+"void"			{  return symbol(VOID, yytext().trim()); }
+"volatile"		{  return symbol(VOLATILE, yytext().trim()); }
+"while"			{  return symbol(WHILE, yytext().trim()); }
+
+"..."			{  return symbol(ELLIPSIS, yytext().trim()); }
+">>="			{  return symbol(RIGHT_ASSIGN, yytext().trim()); }
+"<<="			{  return symbol(LEFT_ASSIGN, yytext().trim()); }
+"+="			{  return symbol(ADD_ASSIGN, yytext().trim()); }
+"-="			{  return symbol(SUB_ASSIGN, yytext().trim()); }
+"*="			{  return symbol(MUL_ASSIGN, yytext().trim()); }
+"/="			{  return symbol(DIV_ASSIGN, yytext().trim()); }
+"%="			{  return symbol(MOD_ASSIGN, yytext().trim()); }
+"&="			{  return symbol(AND_ASSIGN, yytext().trim()); }
+"^="			{  return symbol(XOR_ASSIGN, yytext().trim()); }
+"|="			{  return symbol(OR_ASSIGN, yytext().trim()); }
+">>"			{  return symbol(RIGHT_OP, yytext().trim()); }
+"<<"			{  return symbol(LEFT_OP, yytext().trim()); }
+"++"			{  return symbol(INC_OP, yytext().trim()); }
+"--"			{  return symbol(DEC_OP, yytext().trim()); }
+"->"			{  return symbol(PTR_OP, yytext().trim()); }
+"&&"			{  return symbol(AND_OP, yytext().trim()); }
+"||"			{  return symbol(OR_OP, yytext().trim()); }
+"<="			{  return symbol(LE_OP, yytext().trim()); }
+">="			{  return symbol(GE_OP, yytext().trim()); }
+"=="			{  return symbol(EQ_OP, yytext().trim()); }
+"!="			{  return symbol(NE_OP, yytext().trim()); }
+";"			{  return symbol(';', yytext().trim()); }
+("{"|"<%")		{  return symbol('{', yytext().trim()); }
+("}"|"%>")		{  return symbol('}', yytext().trim()); }
+","			{  return symbol(',', yytext().trim()); }
+":"			{  return symbol(':', yytext().trim()); }
+"="			{  return symbol('=', yytext().trim()); }
+"("			{  return symbol('(', yytext().trim()); }
+")"			{  return symbol(')', yytext().trim()); }
+("["|"<:")		{  return symbol('[', yytext().trim()); }
+("]"|":>")		{  return symbol(']', yytext().trim()); }
+"."			{  return symbol('.', yytext().trim()); }
+"&"			{  return symbol('&', yytext().trim()); }
+"!"			{  return symbol('!', yytext().trim()); }
+"~"			{  return symbol('~', yytext().trim()); }
+"-"			{  return symbol('-', yytext().trim()); }
+"+"			{  return symbol('+', yytext().trim()); }
+"*"			{  return symbol('*', yytext().trim()); }
+"/"			{  return symbol('/', yytext().trim()); }
+"%"			{  return symbol('%', yytext().trim()); }
+"<"			{  return symbol('<', yytext().trim()); }
+">"			{  return symbol('>', yytext().trim()); }
+"^"			{  return symbol('^', yytext().trim()); }
+"|"			{  return symbol('|', yytext().trim()); }
+"?"			{  return symbol('?', yytext().trim()); }
+{WhiteSpace}       {  }
+.			{ throw new Error("Illegal character \""+yytext()+
+                                                              "\" at line "+yyline+", column "+yycolumn); }

@@ -1,0 +1,14 @@
+	int n=3;
+	int m=4; 
+
+	printf("Da");
+
+	if(m>n)
+	{
+		n = m;
+	}
+	else
+	{
+		m = n;
+	}
+}

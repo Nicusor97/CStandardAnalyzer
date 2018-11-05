@@ -54,4 +54,17 @@
     </pluginManagement>
     </build>
   
+    <dependencies>
+    	<dependency>
+    		<groupId>de.jflex</groupId>
+    		<artifactId>cup_runtime</artifactId>
+    		<version>11b</version>
+    	</dependency>
+    	<dependency>
+    <groupId>edu.princeton.cup</groupId>
+    <artifactId>java-cup</artifactId>
+    <version>10k</version>
+</dependency>
+    	
+    </dependencies>
 </project>
