@@ -1,4 +1,4 @@
-package com.analizor;
+package com.analyzer;
 
 public interface sym {
 public static final int EOF = 0;
@@ -33,7 +33,6 @@ public static final int VOID = 28;
 public static final int VOLATILE = 29;
 public static final int WHILE = 30;
 
-
 public static final int CONSTANT = 31;
 public static final int ELLIPSIS = 32;
 public static final int RIGHT_ASSIGN = 33;
@@ -65,5 +64,12 @@ public static final int NEWLINE = 58;
 public static final int IDENTIFIER = 59;
 public static final int LIBRARY = 60;
 public static final int STRING = 61;
+public static final int INT_CONST=62;
+public static final int SEMI=63;
+public static final int L_BRACE=64;
+public static final int R_BRACE=65;
+public static final int COMMA=66;
+public static final int STRING_CONST=67;
+public static final int DOUBLE_CONST=68;
 
 }

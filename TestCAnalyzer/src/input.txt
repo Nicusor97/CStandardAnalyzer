@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+void main()
+{
+	/* nicusor 
+	nicosor2
+	nicusor3 */
+	// sabin
+	
+	int a = 3;
+	int b = 4;
+	
+	if (a > b)
+	{
+		a=b;
+	} 
+	else
+	{
+		b=a;
+	}
+	
+	_wrong_variable = "aaa";
+	6identifer= "b";
+}
