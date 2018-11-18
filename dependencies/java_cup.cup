@@ -1,0 +1,129 @@
+import java_cup.runtime.*;
+
+parser code {:
+  Lexer lexer;
+
+  public parser(Lexer lexer) {
+    this.lexer = lexer;
+  } 
+  
+  public void report_error(String message, Object info) {
+       
+            StringBuilder m = new StringBuilder("Error");
+       
+            if (info instanceof java_cup.runtime.Symbol) {
+                java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+       
+                if (s.left >= 0) {                
+                    m.append(" in line "+(s.left+1));   
+                    if (s.right >= 0)                    
+                        m.append(", column "+(s.right+1));
+                }
+            }
+       
+            m.append(" : "+message);
+       
+            System.err.println(m);
+        }
+       
+      public void report_fatal_error(String message, Object info) {
+          report_error(message, info);
+          System.exit(1);
+
+		}
+:}
+
+/* define how to connect to the scanner! */
+scan with {: return s.next_token(); :};
+
+/* Terminals (tokens returned by the scanner). */
+terminal            SEMI, 
+                    PLUS, 
+                    MINUS, 
+                    TIMES, 
+                    DIVIDE, 
+                    MOD, 
+                    UMINUS, 
+                    LPAREN, 
+                    RPAREN,
+                    LBRACK,
+                    RBRACK,
+                    LBRACE,
+                    RBRACE,
+                    NOT,
+                    LESS,
+                    LESSEQUAL,
+                    GREATER,
+                    GREATEREQUAL,
+                    EQUAL,
+                    NOTEQUAL,
+                    AND,
+                    OR,
+                    ASSIGNOP,
+                    PERIOD,
+                    COMMA,
+                    INTCONSTANT,
+                    DOUBLECONSTANT,
+                    STRINGCONSTANT,
+                    BOOLEANCONSTANT,
+                    INT,
+                    DOUBLE,
+                    VOID,
+                    CLASS,
+                    ID,
+                    STRING,
+                    BOOLEAN,
+                    EXTENDS,
+                    IMPLEMENTS,
+                    INTERFACE,
+                    IF,
+                    ELSE,
+                    WHILE,
+                    FOR,
+                    BREAK,
+                    RETURN,
+                    PRINTLN,
+                    READLN,
+                    NEWARRAY
+;
+
+/* Non terminals */
+non terminal            expr,
+                        actuals,
+                        constant,
+                        program,
+                        decl,
+                        variableDecl,
+                        variable,
+                        functionDecl,
+                        formals,
+                        classDecl,
+                        field,
+                        interfaceDecl,
+                        prototype,
+                        stmtBlock,
+                        stmt,
+                        ifStmt,
+                        whileStmt,
+                        forStmt,
+                        breakStmt,
+                        returnStmt,
+                        lvalue,
+                        call,
+            						/* new terminals added to fix grammar */
+            						decls,
+            						form,
+            						imple,
+            						imples,
+            						fields,
+            						prototypes,
+            						variableDecls,
+            						stmts, 
+            						exprs,
+            						exprss,
+                        extendss,
+                        printStmt,
+                        type,
+                        elseStmts
+;
+
