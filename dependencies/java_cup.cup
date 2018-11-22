@@ -34,7 +34,7 @@ parser code {:
 :}
 
 /* define how to connect to the scanner! */
-scan with {: return s.next_token(); :};
+scan with {: return lexer.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
 terminal            SEMI, 
@@ -129,7 +129,7 @@ terminal            SEMI,
 /* Non terminals */
 non terminal            primary_expression,
                         postfix_expression,
-                        abstract_declarator
+                        abstract_declarator,
                         argument_expression_list,
                         unary_operator,
                         unary_expression,
@@ -178,6 +178,7 @@ non terminal            primary_expression,
                         initializer,
                         statement,
                         labeled_statement,
+                        direct_abstract_declarator,
                         compound_statement,
                         declaration_list,
                         statement_list,
@@ -186,7 +187,9 @@ non terminal            primary_expression,
                         jump_statement,
                         translation_unit,
                         external_declaration,
-                        function_definition
+                        function_definition,
+                        initializer_list,
+                        expression_statement
 ;
 
 /* Precedences 
@@ -198,6 +201,10 @@ precedence left PLUS, MINUS;
 precedence left TIMES, DIVIDE, MOD;
 precedence left NOT;
 precedence left LPAREN;
+precedence left LBRACK;
+precedence left L_BRACE;
+
+start with translation_unit;
 
 primary_expression::= IDENTIFIER
 	| CONSTANT
@@ -228,7 +235,6 @@ unary_operator::= AND_OP
 	| TIMES
 	| PLUS
 	| MINUS
-	| '~'
 	| NOT
 	;
 
@@ -459,8 +465,8 @@ direct_abstract_declarator::= LPAREN abstract_declarator RPAREN
 	;
 
 initializer::= assignment_expression
-	| LBRACE initializer_list RBRACE
-	| LBRACE initializer_list COMMA RBRACE
+	| L_BRACE initializer_list R_BRACE
+	| L_BRACE initializer_list COMMA R_BRACE
 	;
 
 initializer_list::= initializer
@@ -480,10 +486,10 @@ labeled_statement::= IDENTIFIER COLON statement
 	| DEFAULT COLON statement
 	;
 
-compound_statement::= LBRACE RBRACE
-	| LBRACE statement_list RBRACE
-	| LBRACE declaration_list RBRACE
-	| LBRACE declaration_list statement_list RBRACE
+compound_statement::= L_BRACE R_BRACE
+	| L_BRACE statement_list R_BRACE
+	| L_BRACE declaration_list R_BRACE
+	| L_BRACE declaration_list statement_list R_BRACE
 	;
 
 declaration_list::= declaration
@@ -498,22 +504,19 @@ expression_statement::= SEMI
 	| expression SEMI
 	;
 
-selection_statement::= IF LPAREN expression RPAREN statement
-	| IF LPAREN expression RPAREN statement ELSE statement
-	| SWITCH LPAREN expression RPAREN statement
-	;
+selection_statement::= IF LPAREN expression RPAREN statement;
 
 iteration_statement::= WHILE LPAREN expression RPAREN statement
-	| DO statement WHILE LPAREN expression RPAREN SEMICOLON
+	| DO statement WHILE LPAREN expression RPAREN SEMI
 	| FOR LPAREN expression_statement expression_statement RPAREN statement
 	| FOR LPAREN expression_statement expression_statement expression RPAREN statement
 	;
 
-jump_statement::= GOTO IDENTIFIER SEMICOLON
-	| CONTINUE SEMICOLON
-	| BREAK SEMICOLON
-	| RETURN SEMICOLON
-	| RETURN expression SEMICOLON
+jump_statement::= GOTO IDENTIFIER SEMI
+	| CONTINUE SEMI
+	| BREAK SEMI
+	| RETURN SEMI
+	| RETURN expression SEMI
 	;
 
 translation_unit::= external_declaration

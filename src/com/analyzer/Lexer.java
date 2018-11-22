@@ -933,7 +933,7 @@ class Lexer implements java_cup.runtime.Scanner, sym {
             // fall through
           case 103: break;
           case 15: 
-            { return symbol(AND, yytext());
+            { return symbol(AND_OP, yytext());
             } 
             // fall through
           case 104: break;
