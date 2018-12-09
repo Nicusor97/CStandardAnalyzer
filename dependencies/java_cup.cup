@@ -1,3 +1,14 @@
+/* Imported packages */
+import Cls.Exp.*;
+import Cls.Stm.*;
+import Cls.Type.*;
+import Cls.Unit.*;
+import Cls.Decl.*;
+import Cls.Decl.Op.*;
+import Cls.Decl.Mod.*;
+import Cls.Decl.Attrib.*;
+
+
 import java_cup.runtime.*;
 
 parser code {:
