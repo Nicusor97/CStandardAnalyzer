@@ -8,183 +8,183 @@ package com.analyzer;
 /** CUP generated class containing symbol constants. */
 public interface sym {
   /* terminals */
-  public static final int SHORT = 40;
-  public static final int SIGNED = 41;
-  public static final int LEFT_ASSIGN = 54;
-  public static final int IDENTIFIER = 75;
-  public static final int TIMES = 7;
-  public static final int MOD_ASSIGN = 59;
-  public static final int OR_OP = 68;
-  public static final int SUB_ASSIGN = 56;
-  public static final int AND_OP = 67;
-  public static final int CONST = 24;
-  public static final int NEWLINE = 74;
-  public static final int SEMI = 2;
-  public static final int REGISTER = 38;
-  public static final int ENUM = 30;
-  public static final int RBRACK = 14;
-  public static final int SIZEOF = 42;
-  public static final int INC_OP = 64;
-  public static final int COMMA = 5;
-  public static final int GE_OP = 70;
-  public static final int RPAREN = 12;
-  public static final int DEC_OP = 65;
-  public static final int AND_ASSIGN = 60;
-  public static final int LBRACK = 13;
-  public static final int LT = 19;
-  public static final int DOUBLE = 28;
-  public static final int STRUCT = 44;
-  public static final int RT = 20;
-  public static final int STRING_CONST = 79;
-  public static final int LE_OP = 69;
-  public static final int LPAREN = 11;
-  public static final int NOT = 17;
-  public static final int XOR_ASSIGN = 61;
-  public static final int FLOAT = 32;
-  public static final int GOTO = 34;
-  public static final int DOUBLE_CONST = 80;
-  public static final int EQ = 18;
-  public static final int RIGHT_ASSIGN = 53;
-  public static final int MOD = 10;
-  public static final int ADD_ASSIGN = 55;
-  public static final int LONG = 37;
-  public static final int PLUS = 3;
-  public static final int DIVIDE = 8;
-  public static final int QUESTION = 87;
-  public static final int WHILE = 50;
-  public static final int UNION = 46;
-  public static final int MUL_ASSIGN = 72;
-  public static final int CHAR = 23;
-  public static final int PTR_OP = 66;
-  public static final int SWITCH = 45;
-  public static final int DO = 27;
-  public static final int FOR = 33;
-  public static final int VOID = 48;
-  public static final int EXTERN = 31;
-  public static final int RETURN = 39;
-  public static final int INT_CONST = 78;
-  public static final int R_BRACE = 16;
-  public static final int ELSE = 29;
-  public static final int BREAK = 22;
-  public static final int DOT = 4;
-  public static final int INT = 35;
+  public static final int QMARK = 75;
+  public static final int SHORT = 44;
+  public static final int SIGNED = 45;
+  public static final int SUB_ASSGN = 82;
+  public static final int IDENTIFIER = 25;
+  public static final int GT = 66;
+  public static final int MOD_ASSGN = 80;
+  public static final int CONST = 30;
+  public static final int NOTEQ = 70;
+  public static final int _BOOL = 55;
+  public static final int REGISTER = 42;
+  public static final int ENUM = 35;
+  public static final int RBRACK = 12;
+  public static final int SIZEOF = 46;
+  public static final int LSHIFT_ASSGN = 83;
+  public static final int COMMA = 14;
+  public static final int RBRACE = 10;
+  public static final int MULT_ASSGN = 78;
+  public static final int RPAREN = 8;
+  public static final int LBRACK = 11;
+  public static final int LT = 17;
+  public static final int BIT_XOR = 71;
+  public static final int DOUBLE = 3;
+  public static final int STRUCT = 48;
+  public static final int LBRACE = 9;
+  public static final int LPAREN = 7;
+  public static final int INTEGER_LITERAL = 23;
+  public static final int NOT = 62;
+  public static final int _COMPLEX = 56;
+  public static final int ADD_ASSGN = 81;
+  public static final int _IMAGINARY = 57;
+  public static final int INLINE = 40;
+  public static final int FLOAT = 37;
+  public static final int GOTO = 38;
+  public static final int ASSGN = 16;
+  public static final int MOD = 63;
+  public static final int LONG = 41;
+  public static final int PLUS = 19;
+  public static final int WHILE = 54;
+  public static final int UNION = 51;
+  public static final int EQUAL = 69;
+  public static final int BITOR_ASSGN = 87;
+  public static final int BIT_COMPL = 61;
+  public static final int CHAR = 29;
+  public static final int RSHIFT_ASSGN = 84;
+  public static final int SWITCH = 49;
+  public static final int DO = 33;
+  public static final int FOR = 4;
+  public static final int STAR = 22;
+  public static final int VOID = 6;
+  public static final int EXTERN = 36;
+  public static final int DIV = 21;
+  public static final int BIT_OR = 72;
+  public static final int RETURN = 5;
+  public static final int ELSE = 34;
+  public static final int RESTRICT = 43;
+  public static final int BREAK = 27;
+  public static final int GTEQ = 68;
+  public static final int DOT = 15;
+  public static final int INT = 2;
+  public static final int AMPER = 60;
   public static final int EOF = 0;
-  public static final int COMMENT = 36;
-  public static final int DEFAULT = 26;
-  public static final int L_BRACE = 15;
-  public static final int MINUS = 6;
-  public static final int LIBRARY = 76;
-  public static final int CONSTANT = 51;
-  public static final int OR = 86;
+  public static final int SEMICOLON = 13;
+  public static final int DEFAULT = 32;
+  public static final int DECREMENT = 59;
+  public static final int BITXOR_ASSGN = 86;
+  public static final int MINUS = 20;
+  public static final int LTEQ = 67;
+  public static final int OR = 74;
   public static final int error = 1;
-  public static final int RIGHT_OP = 62;
-  public static final int OR_ASSIGN = 9;
-  public static final int CONTINUE = 25;
-  public static final int IF = 73;
-  public static final int EMUL_ASSIGN = 57;
-  public static final int UNSIGNED = 47;
-  public static final int DIV_ASSIGN = 58;
-  public static final int COLON = 84;
-  public static final int VOLATILE = 49;
-  public static final int CASE = 83;
-  public static final int NE_OP = 81;
-  public static final int EQ_OP = 71;
-  public static final int STRING = 77;
-  public static final int ELLIPSIS = 52;
-  public static final int STATIC = 43;
-  public static final int TYPEDEF = 82;
-  public static final int XOR = 85;
-  public static final int AUTO = 21;
-  public static final int LEFT_OP = 63;
+  public static final int INDIR_SEL = 58;
+  public static final int CONTINUE = 31;
+  public static final int IF = 39;
+  public static final int UNSIGNED = 52;
+  public static final int COLON = 76;
+  public static final int DIV_ASSGN = 79;
+  public static final int VOLATILE = 53;
+  public static final int CASE = 28;
+  public static final int PLUSPLUS = 18;
+  public static final int RSHIFT = 65;
+  public static final int BITAND_ASSGN = 85;
+  public static final int AND = 73;
+  public static final int ELLIPSIS = 77;
+  public static final int STATIC = 47;
+  public static final int LSHIFT = 64;
+  public static final int TYPEDEF = 50;
+  public static final int AUTO = 26;
+  public static final int FLOATING_POINT_LITERAL = 24;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "SEMI",
-  "PLUS",
-  "DOT",
-  "COMMA",
-  "MINUS",
-  "TIMES",
-  "DIVIDE",
-  "OR_ASSIGN",
-  "MOD",
+  "INT",
+  "DOUBLE",
+  "FOR",
+  "RETURN",
+  "VOID",
   "LPAREN",
   "RPAREN",
+  "LBRACE",
+  "RBRACE",
   "LBRACK",
   "RBRACK",
-  "L_BRACE",
-  "R_BRACE",
-  "NOT",
-  "EQ",
+  "SEMICOLON",
+  "COMMA",
+  "DOT",
+  "ASSGN",
   "LT",
-  "RT",
+  "PLUSPLUS",
+  "PLUS",
+  "MINUS",
+  "DIV",
+  "STAR",
+  "INTEGER_LITERAL",
+  "FLOATING_POINT_LITERAL",
+  "IDENTIFIER",
   "AUTO",
   "BREAK",
+  "CASE",
   "CHAR",
   "CONST",
   "CONTINUE",
   "DEFAULT",
   "DO",
-  "DOUBLE",
   "ELSE",
   "ENUM",
   "EXTERN",
   "FLOAT",
-  "FOR",
   "GOTO",
-  "INT",
-  "COMMENT",
+  "IF",
+  "INLINE",
   "LONG",
   "REGISTER",
-  "RETURN",
+  "RESTRICT",
   "SHORT",
   "SIGNED",
   "SIZEOF",
   "STATIC",
   "STRUCT",
   "SWITCH",
+  "TYPEDEF",
   "UNION",
   "UNSIGNED",
-  "VOID",
   "VOLATILE",
   "WHILE",
-  "CONSTANT",
-  "ELLIPSIS",
-  "RIGHT_ASSIGN",
-  "LEFT_ASSIGN",
-  "ADD_ASSIGN",
-  "SUB_ASSIGN",
-  "EMUL_ASSIGN",
-  "DIV_ASSIGN",
-  "MOD_ASSIGN",
-  "AND_ASSIGN",
-  "XOR_ASSIGN",
-  "RIGHT_OP",
-  "LEFT_OP",
-  "INC_OP",
-  "DEC_OP",
-  "PTR_OP",
-  "AND_OP",
-  "OR_OP",
-  "LE_OP",
-  "GE_OP",
-  "EQ_OP",
-  "MUL_ASSIGN",
-  "IF",
-  "NEWLINE",
-  "IDENTIFIER",
-  "LIBRARY",
-  "STRING",
-  "INT_CONST",
-  "STRING_CONST",
-  "DOUBLE_CONST",
-  "NE_OP",
-  "TYPEDEF",
-  "CASE",
-  "COLON",
-  "XOR",
+  "_BOOL",
+  "_COMPLEX",
+  "_IMAGINARY",
+  "INDIR_SEL",
+  "DECREMENT",
+  "AMPER",
+  "BIT_COMPL",
+  "NOT",
+  "MOD",
+  "LSHIFT",
+  "RSHIFT",
+  "GT",
+  "LTEQ",
+  "GTEQ",
+  "EQUAL",
+  "NOTEQ",
+  "BIT_XOR",
+  "BIT_OR",
+  "AND",
   "OR",
-  "QUESTION"
+  "QMARK",
+  "COLON",
+  "ELLIPSIS",
+  "MULT_ASSGN",
+  "DIV_ASSGN",
+  "MOD_ASSGN",
+  "ADD_ASSGN",
+  "SUB_ASSGN",
+  "LSHIFT_ASSGN",
+  "RSHIFT_ASSGN",
+  "BITAND_ASSGN",
+  "BITXOR_ASSGN",
+  "BITOR_ASSGN"
   };
 }
 

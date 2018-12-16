@@ -13,7 +13,7 @@ public class Main {
 //        Lexer lex = null;
 ////        PrintWriter writer = new PrintWriter("output.txt", "UTF-8");
 //        try {
-//            lex = new Lexer(new FileReader("src/input.txt"));
+//            lex = new Lexer(new FileReader("E:\\Facultate Anul 4\\Workspace\\NewAnalyzerImplementation\\Tests\\input.txt"));
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
@@ -28,12 +28,11 @@ public class Main {
 ////                writer.println(e);
 //            }
 //        } while (symbol.sym != 0);
-//        writer.close();
-        
+////        writer.close();
+//        
         try {
-            parser p = new parser(new Lexer(new FileReader("src/input.txt")));
+            parser p = new parser(new Lexer(new FileReader("E:\\Facultate Anul 4\\Workspace\\NewAnalyzerImplementation\\Tests\\input.txt")));
 //            Object result = p.parse().value;
-            System.out.println("aaaaaa");
             p.debug_parse();
        
           } catch (Exception e) {
@@ -41,6 +40,6 @@ public class Main {
             } finally {
               /* do close out here */
               }
-        } 
-    }
-//}
+//        } 
+//    }
+}}
